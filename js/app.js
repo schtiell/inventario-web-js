@@ -1,9 +1,14 @@
 
 
-import { inventario, agregarProducto } from "./inventario.js";
+// Importación de módulos
+import { inventario, agregarProducto, eliminarPorducto, actualizarStock } from "./inventario.js";
+
+
 
 const contenedor = document.querySelector("#inventario");
 const btnAgregar = document.querySelector("#agregar");
+
+
 
 const renderInventario = ( ) => {
 
@@ -20,9 +25,37 @@ const renderInventario = ( ) => {
             <p>Precio: $${ producto.precio }</p>
             <p>Stock: ${ producto.stock }</p>
             <p>Categoria: ${ producto.categoria }</p>
+
+            <button class="sumar"> + </button>
+            <button class="restar"> - </button>
+            <button class="eliminar"> Eliminar </button>
         `;
 
         contenedor.appendChild( div );
+
+        const btnEliminar = div.querySelector( ".eliminar" );
+        const btnSumar = div.querySelector( ".sumar" );
+        const btnRestar = div. querySelector( ".restart" );
+
+
+        btnEliminar.addEventListener( "click", ( ) => { 
+
+            eliminarPorducto(producto.id);
+            renderInventario( );
+        });
+
+        btnSumar.addEventListener( "click", ( ) => {
+
+            actualizarStock( producto.id, 1 );
+            renderInventario( );
+
+        });
+
+        btnRestar.addEventListener( "click", ( )=> {
+            
+            actualizarStock( producto.id, -1);
+            renderInventario( );
+        })
     });
 };
 
