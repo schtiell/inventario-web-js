@@ -15,7 +15,8 @@ export const obtenerInventario = ( ) => inventario;
 
 
 // Agregar producto al inventario
-export const agregarProducto = producto => inventario = [ ...inventario, producto ];
+export const agregarProducto = producto => 
+    inventario = [ ...inventario, producto ];
 
 
 //Eliminar Producto
@@ -34,17 +35,6 @@ export const actualizarStock = ( id, cantidad ) => {
 
     console.log( "Actualizar stock: ", id );
 
-    /*console.log( "ANTES: ", inventario );
-
-    inventario.forEach( producto => {
-
-        if ( producto.id === id ) {
-
-            producto.stock += cantidad;
-        }
-    });
-    */
-
     inventario = inventario.map( producto => {
 
         if( producto.id === id ){
@@ -57,6 +47,4 @@ export const actualizarStock = ( id, cantidad ) => {
 
         return producto;
     });
-
-    console.log( "DESPUES: ", inventario );
 }

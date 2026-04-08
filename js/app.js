@@ -12,14 +12,15 @@ import { letraCapital } from "./utils.js";
 
 const contenedor = document.querySelector("#inventario");
 const btnAgregar = document.querySelector("#agregar");
+const inputBuscar = document.querySelector("#buscar");
 
 
 
-const renderInventario = ( ) => {
+const renderInventario = ( lista = obtenerInventario( ) ) => {
 
     contenedor.innerHTML = "";
 
-    obtenerInventario().forEach( producto => { 
+    lista.forEach( producto => { 
         
         const div = document.createElement( "div" );
 
@@ -94,4 +95,32 @@ btnAgregar.addEventListener( "click", ( ) => {
     renderInventario( );
 });
 
+inputBuscar.addEventListener( "input", e => {
+
+    const texto = e.target.value;
+        
+    console.log("Buscando", texto);
+    
+    const filtrados = filtrarProductos( texto );
+    
+    renderInventario( filtrados );
+
+});
+
 renderInventario( );
+
+
+const filtrarProductos = texto => {
+
+    const inventario = obtenerInventario();
+
+    if ( !texto ) return inventario;
+
+    return obtenerInventario().filter( producto =>
+
+        producto.nombre
+            .toLowerCase()
+            .trim()
+            .includes(texto.toLowerCase().trim())
+    );
+}
