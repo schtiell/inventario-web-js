@@ -7,22 +7,32 @@
     <title>Sistema Inventario</title>
 </head>
 <body>
+
     <h1>Sistema de Inventario</h1>
 
+    <!-- Sección donde se agregan los nuevos productos al inventario -->
     <section>
+
         <h2>Agregar producto</h2>
 
-        <input type="text" id="nombre" placeholder="Nombre">
-        <input type="number" id="precio" placeholder="Precio">
-        <input type="number" id="stock" placeholder="Stock">
-        <input type="text" id="categoria" placeholder="Categoria">
-    </section>
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="number" id="precio" placeholder="Precio" required>
+        <input type="number" id="stock" placeholder="Stock" required>
+        <input type="text" id="categoria" placeholder="Categoria" required>
 
+        <button id="agregar" >Agregar producto</button>
+
+    </section>
+    
+
+    <!-- Sección donde se muestran los productos del inventario-->
     <section>
+
         <h2>Inventario</h2>
         <div id="inventario"></div>
+        
     </section>
 
-    <script type="module" src="./js/app.js"></script>
+    <script type="module" src="./js/app.js" ></script>
 </body>
 </html>

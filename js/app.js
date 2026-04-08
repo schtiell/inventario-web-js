@@ -1,7 +1,12 @@
 
-
 // Importación de módulos
-import { inventario, agregarProducto, eliminarPorducto, actualizarStock } from "./inventario.js";
+import { obtenerInventario,
+    agregarProducto,
+    eliminarProducto,
+    actualizarStock 
+} from "./inventario.js";
+
+import { letraCapital } from "./utils.js";
 
 
 
@@ -12,9 +17,9 @@ const btnAgregar = document.querySelector("#agregar");
 
 const renderInventario = ( ) => {
 
-    contenedor.innerHTML = " ";
+    contenedor.innerHTML = "";
 
-    inventario.forEach( producto => { 
+    obtenerInventario().forEach( producto => { 
         
         const div = document.createElement( "div" );
 
@@ -35,39 +40,48 @@ const renderInventario = ( ) => {
 
         const btnEliminar = div.querySelector( ".eliminar" );
         const btnSumar = div.querySelector( ".sumar" );
-        const btnRestar = div. querySelector( ".restart" );
+        const btnRestar = div. querySelector( ".restar" );
 
 
         btnEliminar.addEventListener( "click", ( ) => { 
 
-            eliminarPorducto(producto.id);
+            console.log( "Eliminar", producto.id );
+
+            eliminarProducto(producto.id);
             renderInventario( );
         });
+
 
         btnSumar.addEventListener( "click", ( ) => {
 
+            console.log( "Sumar", producto.id );
+
             actualizarStock( producto.id, 1 );
+            console.log( obtenerInventario() ); 
             renderInventario( );
 
         });
 
-        btnRestar.addEventListener( "click", ( )=> {
+
+        btnRestar.addEventListener( "click", ( ) => {
+
+            console.log( "Restar", producto.id );
             
             actualizarStock( producto.id, -1);
             renderInventario( );
-        })
+        });
     });
 };
 
+
 btnAgregar.addEventListener( "click", ( ) => {
 
-    const nombre = document.querySelector( "#nombre" ).value;
-    const precio = document.querySelector( "#precio" ).value;
-    const stock = document.querySelector( "#stock" ).value;
-    const categoria = document.querySelector( "#categoria" ).value;
+    const nombre = letraCapital( document.querySelector( "#nombre" ).value );
+    const precio = Number( document.querySelector( "#precio" ).value );
+    const stock = Number( document.querySelector( "#stock" ).value );
+    const categoria = letraCapital( document.querySelector( "#categoria" ).value );
 
     const nuevoProducto = {
-
         id: Date.now(),
         nombre, 
         precio,
@@ -76,7 +90,7 @@ btnAgregar.addEventListener( "click", ( ) => {
     };
 
     agregarProducto( nuevoProducto );
-
+    
     renderInventario( );
 });
 

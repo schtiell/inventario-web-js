@@ -12,6 +12,8 @@ Proyecto desarrollado para practicar Javascript moderno, modularidad y DOM
 - Agregar productos
 - Mostrar inventarios
 - Eliminar productos
+- Actualizar stock
+
 
 ## Objetivo
 Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js
