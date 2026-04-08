@@ -1,19 +1,39 @@
 # Sistema de Inventarios Web
 
-Proyecto desarrollado para practicar Javascript moderno, modularidad y DOM
+Proyecto desarrollado para practicar Javascript moderno, modularidad y DOM.
+
+## Objetivo
+Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js
 
 ## Tecnologias
-- HTML
-- CSS
-- Javascript
+- HTML 5
+- CSS 3 
+- Javascript ( ES6+ )
+- Módulos ES6
 - Git
 
-## Funcionalidad
+## Funcionalidades implementadas
 - Agregar productos
 - Mostrar inventarios
 - Eliminar productos
 - Actualizar stock
+- Disminuir stock
+- Render dinámico del DOM
+- Modularidad con ES Modules
 
+## Conceptos aplicados
+- Arrays y Objetos
+- Destructuring
+- Spread operator
+- map( )
+- filter( )
+- Modularidad
+- Manipulación del DOM
+- Event Listeners
 
-## Objetivo
-Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js
+## Pŕoximas funcionalidades
+- Buscador de productos
+- Filtro por categoria
+- Guardado en LocalStorage
+- UI más profesional
+
