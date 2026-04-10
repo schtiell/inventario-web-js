@@ -1,4 +1,5 @@
 
+// Arreglo de objetos con los detalles de cada producto
 let inventario = [
 
     {
@@ -10,13 +11,16 @@ let inventario = [
     }
 ];
 
+
 //Obtener inventario
 export const obtenerInventario = ( ) => inventario;
+
 
 
 // Agregar producto al inventario
 export const agregarProducto = producto => 
     inventario = [ ...inventario, producto ];
+
 
 
 //Eliminar Producto
@@ -47,4 +51,22 @@ export const actualizarStock = ( id, cantidad ) => {
 
         return producto;
     });
+}
+
+
+
+//Función para realizar filtrado de productos por nombre
+export const filtrarProductos = texto => {
+
+    const inventario = obtenerInventario();
+
+    if ( !texto ) return inventario;
+
+    return obtenerInventario().filter( producto =>
+
+        producto.nombre
+            .toLowerCase()
+            .trim()
+            .includes(texto.toLowerCase().trim())
+    );
 }
