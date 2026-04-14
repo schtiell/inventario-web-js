@@ -1,20 +1,123 @@
+
+/* Reset báisco */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Tipografia */
 body{
     font-family: Arial, Helvetica, sans-serif;
+    background-color: #f5f6fa;
     padding: 20px;
 }
 
+
+/* Titulos */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2f3640;
+}
+
+h2{
+    margin-bottom: 10px;
+    color: #353b48;
+}
+
+
+/* Secciones */
+section{
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px ( 0, 0, 0, .1 );
+}
+
+
+/* Inputs */
 input{
-    margin: 5px;
-    padding: 5px;
-}
-
-button{
-    padding: 6px 10px;
-    cursor: pointer;
-}
-
-.producto{
-    border: 1px solid #ccc;
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px;
+    border-radius: 5px;
+    outline: none;
 }
+
+input:focus{
+    border-color: #40739e;
+}
+
+
+/* Formulario */
+.formulario{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+
+/* Botones */
+button{
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#agregar{
+    background-color: #44bd32;
+    color: white;
+}
+
+#agregar:hover{
+    background-color: #4cd137;
+}
+
+
+/* Tarjetas */
+.producto{
+    background: #f1f2f6;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border-left: 5px solid #40739e;
+}
+
+.producto strong {
+    font-size: 18px;
+}
+
+/* Botones de acción */
+.sumar{
+    background-color: #0097e6;
+    color: white;
+    margin-right: 5px;
+}
+
+.restar{
+    background-color: #e1b12c;
+    color: white;
+    margin-right: 5px;
+}
+
+.eliminar{
+    background-color: #e84118;
+    color: white;
+}
+
+button:hover{
+    opacity: 0.9;
+}
+
+
+/* Grid para inventario */
+#inventario{
+    display: grid;
+    grid-template-columns: repeat( auto-fill, minmax( 250px, 1fr ));
+    gap: 15px
+}
+

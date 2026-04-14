@@ -33,7 +33,8 @@ export const validarProducto = producto => {
 
 //Validación para producto existente en inventario
 export const productoExiste = ( inventario, nombre ) =>
+
     inventario.find( 
-        producto => 
-            producto.nombre.toLowerCase() === nombre.toLowerCase()
+        
+        producto => producto.nombre.toLowerCase() === nombre.toLowerCase()
     );
