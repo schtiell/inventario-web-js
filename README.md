@@ -15,6 +15,7 @@ Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js
 ## Funcionalidades implementadas
 - Agregar productos
 - Mostrar inventarios
+- Buscar productos por nombre
 - Eliminar productos
 - Actualizar stock
 - Disminuir stock
@@ -25,6 +26,18 @@ Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js
 - Actualización de datos persistente
 - Eliminar productos con persistencia
 
+## Arquitectura
+- app.js - UI
+- inventario.js - lógica
+- utils.js - helpers
+- storage.js - persistencia
+
+## Aprendizajes
+- Modularización
+- LocalStorage
+- Validaciones
+- Git workflow
+
 ## Conceptos aplicados
 - Arrays y Objetos
 - Destructuring
@@ -34,9 +47,9 @@ Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js
 - Modularidad
 - Manipulación del DOM
 - Event Listeners
+- Persistencia de datos LocalStorage
 
 ## Pŕoximas funcionalidades
-- Buscador de productos
 - Filtro por categoria
 - UI más profesional
 
