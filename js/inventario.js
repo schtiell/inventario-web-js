@@ -1,5 +1,22 @@
 
-// Arreglo de objetos con los detalles de cada producto
+import {
+    guardar,
+    leer
+} from "./storage.js";
+
+
+export let inventario = leer( "inventario" ) || [
+    {
+        id: 1,
+        nombre: "Laptop",
+        precio: 15000,
+        stock: 5,
+        categoria: "Tecnologia"
+    }
+];
+
+/* Arreglo de objetos con los detalles de cada producto
+
 let inventario = [
 
     {
@@ -10,6 +27,7 @@ let inventario = [
         categoria: "Tecnologia"
     }
 ];
+*/
 
 
 //Obtener inventario
@@ -18,26 +36,28 @@ export const obtenerInventario = ( ) => inventario;
 
 
 // Agregar producto al inventario
-export const agregarProducto = producto => 
+export const agregarProducto = producto => {
+
     inventario = [ ...inventario, producto ];
+    guardar( "inventario", inventario );
+}
+
 
 
 
 //Eliminar Producto
 export const eliminarProducto = id => {
 
-    console.log( "Eliminar desde el inventario: ", id );
-
     inventario = inventario.filter( producto => producto.id !== id );
 
-    return inventario;
+    guardar( "inventario", inventario ); 
 }
 
 
 // Funcion para actualizar el stock
 export const actualizarStock = ( id, cantidad ) => {
 
-    console.log( "Actualizar stock: ", id );
+    //console.log( "Actualizar stock: ", id );
 
     inventario = inventario.map( producto => {
 
@@ -48,9 +68,12 @@ export const actualizarStock = ( id, cantidad ) => {
                 stock: Number( producto.stock ) + cantidad
             };
         }
-
         return producto;
     });
+
+    guardar( "inventario", inventario );
+
+    return inventario;
 }
 
 

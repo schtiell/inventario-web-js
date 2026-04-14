@@ -20,6 +20,10 @@ Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js
 - Disminuir stock
 - Render dinámico del DOM
 - Modularidad con ES Modules
+- Guardar inventario automáticamente
+- Mnatener datos al recargar el navegador
+- Actualización de datos persistente
+- Eliminar productos con persistencia
 
 ## Conceptos aplicados
 - Arrays y Objetos
@@ -34,6 +38,8 @@ Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js
 ## Pŕoximas funcionalidades
 - Buscador de productos
 - Filtro por categoria
-- Guardado en LocalStorage
 - UI más profesional
+
+## Persistencia con LocalStorage
+Se agregó persistencia del inventario utilizando LocalStorage.
 
