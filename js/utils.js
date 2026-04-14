@@ -35,6 +35,14 @@ export const validarProducto = producto => {
 export const productoExiste = ( inventario, nombre ) =>
 
     inventario.find( 
-        
+
         producto => producto.nombre.toLowerCase() === nombre.toLowerCase()
     );
+
+//Formato de peso Méxicano
+export const formatoMoneda = moneda => {
+return new Intl.NumberFormat('es-MX', {
+    style: 'currency',
+    currency: 'MXN',
+    }).format( moneda );
+}

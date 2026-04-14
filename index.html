@@ -8,40 +8,57 @@
 </head>
 <body>
 
-    <h1>Sistema de Inventario</h1>
+    <header>
+        <h1>Sistema de Inventario</h1>
+    </header>
 
-    <!-- Sección donde se agregan los nuevos productos al inventario -->
-    <section>
+    <main>
 
-        <h2>Agregar producto</h2>
+        <!-- Sección donde se agregan los nuevos productos al inventario -->
+        <section class="panel">
+            <h2>Agregar producto</h2>
 
-       <div class="formulario">
-            <input type="text" id="nombre" placeholder="Nombre" required>
-            <input type="number" id="precio" placeholder="Precio" required>
-            <input type="number" id="stock" placeholder="Stock" required>
-            <input type="text" id="categoria" placeholder="Categoria" required>
-       </div>
+           <div class="formulario">
+                <input type="text" id="nombre" placeholder="Nombre" required>
+                <input type="number" id="precio" placeholder="Precio" required>
+                <input type="number" id="stock" placeholder="Stock" required>
+                <input type="text" id="categoria" placeholder="Categoria" required>
+                <button id="agregar" >Agregar producto</button>
+           </div>
+        </section>
 
-        <button id="agregar" >Agregar producto</button>
 
-    </section>
-    
+        <!--Sección para buscar productos-->
+        <section class="panel">
+            <h2>Buscar productos</h2>
+            <input type="text" id="buscar" placeholder="Buscar producto...">
+        </section>
 
-    <!--Sección para buscar productos-->
-    <section>
-        <h2>Buscar productos</h2>
 
-        <input type="text" id="buscar" placeholder="Buscar producto...">
-    </section>
-    
+        <!--Sección de estadisticas -->
+        <section class="panel estadisticas">
+            <h2>Resumen Inventario</h2>
 
-    <!-- Sección donde se muestran los productos del inventario-->
-    <section>
+            <div class="cards">
+                <div class="card">
+                    <h3>Total productos</h3>
+                    <p id="totalProductos">0</p>
+                </div>
+                
+                <div class="card">
+                    <h3>Total inventario</h3>
+                    <p id="valorInventario">$0.0</p>
+                </div>
+            </div>
+        </section>
 
-        <h2>Inventario</h2>
-        <div id="inventario"></div>
-        
-    </section>
+
+        <!-- Sección donde se muestran los productos del inventario-->
+        <section class="panel">
+            <h2>Inventario</h2>
+            <div id="inventario"></div>
+        </section>
+    </main>
 
     <script type="module" src="./js/app.js" ></script>
 </body>

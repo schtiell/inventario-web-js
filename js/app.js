@@ -10,7 +10,8 @@ import { obtenerInventario,
 
 import { letraCapital, 
     validarProducto, 
-    productoExiste 
+    productoExiste,
+    formatoMoneda 
 } from "./utils.js";
 
 
@@ -27,17 +28,17 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
 
     contenedor.innerHTML = "";
 
-    lista.forEach( producto => { 
+    lista.forEach( ( { id, nombre, precio, stock, categoria } ) => { 
         
         const div = document.createElement( "div" );
 
         div.classList.add( "producto" );
 
         div.innerHTML = `
-            <strong>${ producto.nombre }</strong>
-            <p>Precio: $${ producto.precio }</p>
-            <p>Stock: ${ producto.stock }</p>
-            <p>Categoria: ${ producto.categoria }</p>
+            <strong>${ nombre }</strong>
+            <p>Precio: ${ formatoMoneda( precio ) }</p>
+            <p>Stock: ${ stock }</p>
+            <p>Categoria: ${ categoria }</p>
 
             <button class="sumar"> + </button>
             <button class="restar"> - </button>
@@ -54,9 +55,7 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
         //Control de evento click en el boton eliminar
         btnEliminar.addEventListener( "click", ( ) => { 
 
-            //console.log( "Eliminar", producto.id );
-
-            eliminarProducto(producto.id);
+            eliminarProducto( id );
             renderInventario( );
         });
 
@@ -64,10 +63,7 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
         //Control de evento click en el boton sumar
         btnSumar.addEventListener( "click", ( ) => {
 
-            //console.log( "Sumar", producto.id );
-
-            actualizarStock( producto.id, 1 );
-            console.log( obtenerInventario() ); 
+            actualizarStock( id, 1 );
             renderInventario( );
 
         });
@@ -75,13 +71,13 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
 
         //Control de evento click en el boton restart
         btnRestar.addEventListener( "click", ( ) => {
-
-            //console.log( "Restar", producto.id );
-            
-            actualizarStock( producto.id, -1);
+           
+            actualizarStock( id, -1);
             renderInventario( );
         });
     });
+
+    actualizarEstadisticas( );
 };
 
 
@@ -92,10 +88,10 @@ btnAgregar.addEventListener( "click", ( ) => {
 
 
     //Obteniendo valores de los campos
-    const nombre = letraCapital( document.querySelector( "#nombre" ).value );
-    const precio = Number( document.querySelector( "#precio" ).value );
-    const stock = Number( document.querySelector( "#stock" ).value );
-    const categoria = letraCapital( document.querySelector( "#categoria" ).value );
+    const nombre = letraCapital( document.querySelector("#nombre").value );
+    const precio = Number( document.querySelector("#precio").value );
+    const stock = Number( document.querySelector("#stock").value );
+    const categoria = letraCapital( document.querySelector("#categoria").value );
 
 
     //Creación del objeto con los datos ingresados
@@ -150,6 +146,29 @@ inputBuscar.addEventListener( "input", e => {
     renderInventario( filtrados );
 
 });
+
+
+
+const actualizarEstadisticas = ( ) => {
+
+    const inventario = obtenerInventario();
+
+    const totalProductos = inventario.length;
+
+    const valorInventario = inventario.reduce( ( acc, { precio, stock } ) => 
+            acc + ( precio * stock )
+        ,0
+    )
+
+    const valorFormateado = formatoMoneda( valorInventario );
+
+    document.querySelector( "#totalProductos" )
+        .textContent = totalProductos;
+
+    document.querySelector( "#valorInventario" )
+        .textContent = `${ valorFormateado }`;
+    
+};
 
 //Invocación a la función de renderizado de la app
 renderInventario( );
