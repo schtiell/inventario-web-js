@@ -124,6 +124,7 @@ input:focus{
 
 /* Botones */
 button{
+    margin-top: 10px;
     padding: 8px 12px;
     border: none;
     border-radius: 5px;
@@ -187,6 +188,12 @@ button:hover {
 
 .restar{
     background-color: #e1b12c;
+    color: white;
+    margin-right: 5px;
+}
+
+.editar{
+    background-color: #ED3911;
     color: white;
     margin-right: 5px;
 }

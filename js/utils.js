@@ -46,3 +46,13 @@ return new Intl.NumberFormat('es-MX', {
     currency: 'MXN',
     }).format( moneda );
 }
+
+//
+export const limpiarFormulario = () => {
+
+    document.querySelector("#nombre").value = "";
+    document.querySelector("#precio").value = "";
+    document.querySelector("#stock").value = "";
+    document.querySelector("#categoria").value = "";
+    
+}

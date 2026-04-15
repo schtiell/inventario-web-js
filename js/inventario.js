@@ -54,6 +54,21 @@ export const eliminarProducto = id => {
 }
 
 
+//Editar producto
+export const editarProducto = ( id, datos ) => {
+
+    inventario = inventario.map( producto => 
+        producto.id === id  
+            ? { ...producto, ...datos }
+            : producto
+    );
+
+    guardar( "inventario", inventario );
+
+    return inventario;
+};
+
+
 // Funcion para actualizar el stock
 export const actualizarStock = ( id, cantidad ) => {
 

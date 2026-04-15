@@ -4,23 +4,27 @@ import { obtenerInventario,
     agregarProducto,
     eliminarProducto,
     actualizarStock,
-    filtrarProductos 
+    filtrarProductos, 
+    editarProducto
 } from "./inventario.js";
 
 
 import { letraCapital, 
     validarProducto, 
     productoExiste,
-    formatoMoneda 
+    formatoMoneda,
+    limpiarFormulario 
 } from "./utils.js";
 
+
+// 
+let editandoId = null;
 
 
 //Almacenando en variables elementos html del DOM 
 const contenedor = document.querySelector("#inventario");
 const btnAgregar = document.querySelector("#agregar");
 const inputBuscar = document.querySelector("#buscar");
-
 
 
 // Renderizado de elementos del DOM
@@ -42,6 +46,7 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
 
             <button class="sumar"> + </button>
             <button class="restar"> - </button>
+            <button class="editar"> Editar </button>
             <button class="eliminar"> Eliminar </button>
         `;
 
@@ -50,14 +55,7 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
         const btnEliminar = div.querySelector( ".eliminar" );
         const btnSumar = div.querySelector( ".sumar" );
         const btnRestar = div. querySelector( ".restar" );
-
-
-        //Control de evento click en el boton eliminar
-        btnEliminar.addEventListener( "click", ( ) => { 
-
-            eliminarProducto( id );
-            renderInventario( );
-        });
+        const btnEditar = div.querySelector(".editar");
 
 
         //Control de evento click en el boton sumar
@@ -68,16 +66,37 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
 
         });
 
-
-        //Control de evento click en el boton restart
+        //Control de evento click en el boton restar
         btnRestar.addEventListener( "click", ( ) => {
            
             actualizarStock( id, -1);
             renderInventario( );
         });
+
+        //Control de evento click en el boton editar
+        btnEditar.addEventListener( "click", () =>{
+
+            document.querySelector( "#nombre" ).value = nombre;
+            document.querySelector( "#precio" ).value = precio;
+            document.querySelector( "#stock" ).value = stock;
+            document.querySelector( "#categoria" ).value = categoria;
+
+            editandoId = id;
+        });
+
+        //Control de evento click en el boton eliminar
+        btnEliminar.addEventListener( "click", ( ) => { 
+
+            eliminarProducto( id );
+            renderInventario( );
+        });
+
+
+
     });
 
     actualizarEstadisticas( );
+    limpiarFormulario();
 };
 
 
@@ -96,7 +115,7 @@ btnAgregar.addEventListener( "click", ( ) => {
 
     //Creación del objeto con los datos ingresados
     const nuevoProducto = {
-        id: Date.now(),
+        id: editandoId ?? Date.now(),
         nombre, 
         precio,
         stock,
@@ -115,20 +134,27 @@ btnAgregar.addEventListener( "click", ( ) => {
     }
 
 
-    //Validación del nuevo producto para comprobar existencia en inventario
-    const existente = productoExiste( obtenerInventario( ), nombre );
-
-
-    if ( existente ) {
-
-        actualizarStock( existente.id, stock );
+    // Validar si se trata de una edición del producto
+    if ( editandoId ){
+        
+        editarProducto( editandoId, nuevoProducto );
+        editandoId = null;
 
     } else {
 
-        agregarProducto( nuevoProducto );
-    }
-    
+        //Validación del nuevo producto para comprobar existencia en inventario
+        const existente = productoExiste( obtenerInventario( ), nombre );
 
+        if ( existente ) {;
+
+            actualizarStock( existente.id, stock );
+
+        } else {
+
+            agregarProducto( nuevoProducto );
+        }
+    } 
+    
     renderInventario( );
 
 });
