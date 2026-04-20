@@ -25,6 +25,7 @@ let editandoId = null;
 const contenedor = document.querySelector("#inventario");
 const btnAgregar = document.querySelector("#agregar");
 const inputBuscar = document.querySelector("#buscar");
+const selectCategoria = document.querySelector("#filtroCategoria");
 
 
 // Renderizado de elementos del DOM
@@ -87,15 +88,18 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
         //Control de evento click en el boton eliminar
         btnEliminar.addEventListener( "click", ( ) => { 
 
-            eliminarProducto( id );
-            renderInventario( );
+            const confirmar = confirm( `Eliminar producto "${ nombre }"?`);
+
+            if ( confirmar ){
+
+                eliminarProducto( id );
+                renderInventario( );
+            }
         });
-
-
-
     });
 
     actualizarEstadisticas( );
+    renderCategorias();
     limpiarFormulario();
 };
 
@@ -173,8 +177,21 @@ inputBuscar.addEventListener( "input", e => {
 
 });
 
+//Funcion para el control del evento change ejecutado por el elemento select html
+selectCategoria.addEventListener("change", e => {
+
+    const categoria = e.target.value;
+
+    console.log("Categoria seleccionada:", categoria);
+
+    const filtrados = filtrarPorCategoria( categoria );
+
+    renderInventario( filtrados );
+});
 
 
+
+//Función para obtener los diferentes productos, y el valor del inventario actual
 const actualizarEstadisticas = ( ) => {
 
     const inventario = obtenerInventario();
@@ -195,6 +212,60 @@ const actualizarEstadisticas = ( ) => {
         .textContent = `${ valorFormateado }`;
     
 };
+
+
+//Función para obtener las diferentes categorias de los productos
+const obtenerCategorias = ( ) => {
+
+    const inventario = obtenerInventario();
+
+    const categorias = inventario.map( producto => producto.categoria );
+
+    const categoriasUnicas = [...new Set( categorias ) ];
+
+    return categoriasUnicas;
+
+};
+
+
+//Construcción dinámica de las opciones del elemento select con las categorias de los productos
+const renderCategorias = ( ) => {
+
+    const select = document.querySelector( "#filtroCategoria" );
+
+    const categorias = obtenerCategorias();
+
+    select.innerHTML = `
+        <option value="">Todas las categorias</option>
+    `;
+
+    categorias.forEach( categoria => {
+
+        const option = document.createElement( "option" );
+
+        option.value = categoria;
+
+        option.textContent = categoria;
+
+        select.appendChild( option );
+    });
+};
+
+
+const filtrarPorCategoria = categoria => {
+
+    const inventario = obtenerInventario();
+
+    if  ( !categoria ) 
+        return inventario;
+
+    return inventario.filter(
+        producto => producto.categoria === categoria
+    );
+};
+
+
+
 
 //Invocación a la función de renderizado de la app
 renderInventario( );

@@ -71,6 +71,11 @@ h2{
     gap: 10px;
 }
 
+.panel select{
+    flex: 1;
+    min-width: 180px;
+}
+
 /* Inputs */
 input{
     padding: 10px;
@@ -84,6 +89,32 @@ input:focus{
     border-color: #40739e;
 }
 
+/* Select */
+select{
+    padding: 10px;
+    margin: 5px;
+    border-radius: 5px;
+    border: 1px solid #dcdde1;
+    background-color: white;
+    cursor: pointer;
+    outline: none;
+}
+
+select:focus{
+    border-color: #40739e;
+}
+
+select:hover{
+    border-color: #40739e;
+}
+
+/*
+#filtroCategoria{
+    display: block;
+    margin-top: 20pz;
+    width: 100%;
+    max-width: 300px;
+}*/
 
 /* ======================== */
 /* Estadisticas */

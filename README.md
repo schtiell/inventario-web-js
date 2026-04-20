@@ -23,7 +23,9 @@ Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js, const
 - Agregar productos
 - Mostrar inventarios
 - Buscar productos por nombre
+- Filtro por categoria
 - Eliminar productos
+- Confirmación antes de eliminar productos
 - Actualizar stock
 - Disminuir stock
 - Render dinámico del DOM
@@ -99,6 +101,9 @@ index.html - estructura de la aplicación
 - JavaScript moderno (ES6+)
 - Arquitectura modular
 - Persistencia de datos
+- Manejo de filtros dinámicos
+- Optimización de event listeners
+- Generación dinámica de select options
 - Diseño de Dashboard
 - Separación UI/lógica
 - Git workflow
@@ -107,8 +112,24 @@ index.html - estructura de la aplicación
 
 
 ## Próximas funcionalidades
-- Filtro por categoria
 - Ordenar productos
 - Editar productos
 - Mejoras UI adicionales
 - Migración a ReactJS
+
+
+
+## Filtro por Categoría
+Se implementó un filtro dinámico por categoria que permite visualizar únicamente los productos pertenecientes a la categoria seleccionada.
+
+Características:
+- Categorias generadas dinámicamente
+- Filtrado en tiempo real
+- Integración con render dinámico
+- Mejora en experiencia de usuario
+
+
+## Mejoras UX
+- Confirmación antes de eliminar productos
+- Filtro dinámico por categoria
+- Interfaz más intuitiva
