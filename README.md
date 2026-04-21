@@ -24,6 +24,9 @@ Convertirme en desarrollador web utilizando Javascript, ReactJS y Node.js, const
 - Mostrar inventarios
 - Buscar productos por nombre
 - Filtro por categoria
+- Ordenamiento por nombre
+- Ordenamiento por precio
+- Filtro combinado ( busqueda + categoria + orden )
 - Eliminar productos
 - Confirmación antes de eliminar productos
 - Actualizar stock
@@ -89,6 +92,10 @@ index.html - estructura de la aplicación
 - map()
 - filter()
 - reduce()
+- sort()
+- localeCompare()
+- FIltro combiando
+- Copia de arrays con spread operator
 - Modularidad
 - Manipulación del DOM
 - Event Listeners
@@ -127,6 +134,22 @@ Características:
 - Filtrado en tiempo real
 - Integración con render dinámico
 - Mejora en experiencia de usuario
+
+## Ordenamiento Dinámico
+Se implementó un sistema de ordenamiento dinámico de productos
+
+- Ordenar por nombre (A-Z)
+- Ordenar por nombre (Z-A)
+- Ordenar por precio de menor a mayor
+- Ordenar por precio de mayor a menor
+
+El ordenamiento funciona de manera combinada con:
+ - Búsqueda por texto
+ - Filtro por categoria
+
+Esto permite una experiencia más profesional y flexible en la gestión del inventario.
+
+
 
 
 ## Mejoras UX

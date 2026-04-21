@@ -26,6 +26,7 @@ const contenedor = document.querySelector("#inventario");
 const btnAgregar = document.querySelector("#agregar");
 const inputBuscar = document.querySelector("#buscar");
 const selectCategoria = document.querySelector("#filtroCategoria");
+const selectOrdenar = document.querySelector("#ordenar");
 
 
 // Renderizado de elementos del DOM
@@ -98,8 +99,7 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
         });
     });
 
-    actualizarEstadisticas( );
-    renderCategorias();
+    actualizarEstadisticas();
     limpiarFormulario();
 };
 
@@ -149,7 +149,7 @@ btnAgregar.addEventListener( "click", ( ) => {
         //Validación del nuevo producto para comprobar existencia en inventario
         const existente = productoExiste( obtenerInventario( ), nombre );
 
-        if ( existente ) {;
+        if ( existente ) {
 
             actualizarStock( existente.id, stock );
 
@@ -165,28 +165,23 @@ btnAgregar.addEventListener( "click", ( ) => {
 
 
 //Funcion para controlar el evento de ingresar texto en el input de busqueda
-inputBuscar.addEventListener( "input", e => {
+inputBuscar.addEventListener( "input", ( ) => {
 
-    const texto = e.target.value;
-        
-    //console.log("Buscando", texto);
-    
-    const filtrados = filtrarProductos( texto );
-    
-    renderInventario( filtrados );
+    filtrarInventario();
 
 });
 
 //Funcion para el control del evento change ejecutado por el elemento select html
-selectCategoria.addEventListener("change", e => {
+selectCategoria.addEventListener("change", ( ) => {
 
-    const categoria = e.target.value;
+    filtrarInventario();
 
-    console.log("Categoria seleccionada:", categoria);
+});
 
-    const filtrados = filtrarPorCategoria( categoria );
+//Funcion para el control del evento change ejecutado por el elemento select html
+selectOrdenar.addEventListener( "change", () => {
 
-    renderInventario( filtrados );
+    filtrarInventario();
 });
 
 
@@ -211,6 +206,63 @@ const actualizarEstadisticas = ( ) => {
     document.querySelector( "#valorInventario" )
         .textContent = `${ valorFormateado }`;
     
+};
+
+//Funcion para realizar filtrado por producto y categoria
+const filtrarInventario = ( ) => {
+
+    const texto = inputBuscar.value.toLowerCase();
+    const categoria = selectCategoria.value;
+
+    const inventario = obtenerInventario();
+
+    const filtrados = inventario.filter( producto => {
+
+        const coincideTexto = producto.nombre
+            .toLowerCase()
+            .includes( texto );
+
+        const coincideCategoria = 
+            categoria === "" || 
+            producto.categoria === categoria;
+
+        return coincideTexto && coincideCategoria;
+
+    });
+
+    const ordenados = ordernarInventario( filtrados );
+    renderInventario( ordenados );
+
+};
+
+
+const ordernarInventario = ( lista ) => {
+
+    const orden = selectOrdenar.value;
+
+    if ( !orden )
+        return lista;
+
+    return [...lista ].sort( ( a, b ) => {
+
+        switch ( orden ) {
+
+            case "nombre-asc":
+                return a.nombre.localeCompare( b.nombre );
+
+            case "nombre-desc":
+                return b.nombre.localeCompare( a.nombre );
+            
+            case "precio-asc":
+                return a.precio - b.precio;
+
+            case "precio-desc":
+                return b.precio - a.precio;
+
+            default:
+            return 0;
+        }
+    });
 };
 
 
@@ -251,23 +303,7 @@ const renderCategorias = ( ) => {
     });
 };
 
-
-const filtrarPorCategoria = categoria => {
-
-    const inventario = obtenerInventario();
-
-    if  ( !categoria ) 
-        return inventario;
-
-    return inventario.filter(
-        producto => producto.categoria === categoria
-    );
-};
-
-
-
-
 //Invocación a la función de renderizado de la app
 renderInventario( );
-
+renderCategorias();
 
