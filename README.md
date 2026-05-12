@@ -125,16 +125,6 @@ index.html - estructura de la aplicación
 - Migración a ReactJS
 
 
-
-## Filtro por Categoría
-Se implementó un filtro dinámico por categoria que permite visualizar únicamente los productos pertenecientes a la categoria seleccionada.
-
-Características:
-- Categorias generadas dinámicamente
-- Filtrado en tiempo real
-- Integración con render dinámico
-- Mejora en experiencia de usuario
-
 ## Ordenamiento Dinámico
 Se implementó un sistema de ordenamiento dinámico de productos
 
@@ -150,9 +140,32 @@ El ordenamiento funciona de manera combinada con:
 Esto permite una experiencia más profesional y flexible en la gestión del inventario.
 
 
-
-
 ## Mejoras UX
 - Confirmación antes de eliminar productos
 - Filtro dinámico por categoria
 - Interfaz más intuitiva
+
+
+## Filtros, Ordenamiento y Paginación
+Se implementó un sistema dinámico que permite gestionar grandes volúmenes de productos de forma eficiente:
+
+### Funcionalidades:
+
+- Búsqueda en tiempo real por nombre de producto
+- Filtrado por categoria
+- Ordenamiento por:
+    - Nombre ( ascendente / descendente )
+    - Precio ( ascendente / descendente )
+- Paginación de resultados
+
+### Características técnicas:
+- Combinación de múltiples filtros simultáneamente
+- Renderizado dinámico del DOM
+- Cálculo automático de páginas  según resultados
+- Actualización reactiva ante cualquier cambio (CRUD)
+
+### Beneficios:
+- Mejora significativa en la experiencia de usuario
+- Mayor escalabilidad del sistema
+- Optimización en el renderizado de listas grandes
+

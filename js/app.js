@@ -17,8 +17,12 @@ import { letraCapital,
 } from "./utils.js";
 
 
-// 
+//Variable para controlar si se agrega producto nuevo o se actualiza
 let editandoId = null;
+
+//variable y constante para la paginación de productos
+let paginaActual = 1;
+const productosPorPagina = 5;
 
 
 //Almacenando en variables elementos html del DOM 
@@ -64,7 +68,7 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
         btnSumar.addEventListener( "click", ( ) => {
 
             actualizarStock( id, 1 );
-            renderInventario( );
+            filtrarInventario();
 
         });
 
@@ -72,7 +76,7 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
         btnRestar.addEventListener( "click", ( ) => {
            
             actualizarStock( id, -1);
-            renderInventario( );
+            filtrarInventario();
         });
 
         //Control de evento click en el boton editar
@@ -94,7 +98,7 @@ const renderInventario = ( lista = obtenerInventario( ) ) => {
             if ( confirmar ){
 
                 eliminarProducto( id );
-                renderInventario( );
+                filtrarInventario();
             }
         });
     });
@@ -159,7 +163,7 @@ btnAgregar.addEventListener( "click", ( ) => {
         }
     } 
     
-    renderInventario( );
+    filtrarInventario();
 
 });
 
@@ -167,6 +171,7 @@ btnAgregar.addEventListener( "click", ( ) => {
 //Funcion para controlar el evento de ingresar texto en el input de busqueda
 inputBuscar.addEventListener( "input", ( ) => {
 
+    paginaActual = 1;
     filtrarInventario();
 
 });
@@ -174,6 +179,7 @@ inputBuscar.addEventListener( "input", ( ) => {
 //Funcion para el control del evento change ejecutado por el elemento select html
 selectCategoria.addEventListener("change", ( ) => {
 
+    paginaActual = 1;
     filtrarInventario();
 
 });
@@ -181,9 +187,46 @@ selectCategoria.addEventListener("change", ( ) => {
 //Funcion para el control del evento change ejecutado por el elemento select html
 selectOrdenar.addEventListener( "change", () => {
 
+    paginaActual = 1;
     filtrarInventario();
 });
 
+
+//Render de paginación
+const renderPaginacion = total => {
+
+
+    console.log("Total productos:", total);
+
+    const totalPaginas =  Math.ceil( total / productosPorPagina );
+
+    const contenedor = document.querySelector( "#paginacion" );
+
+    contenedor.innerHTML = "";
+
+    for (let i = 1; i <= totalPaginas; i++) {
+
+        const btn = document.createElement( "button" );
+
+        btn.textContent = i;
+        
+        if ( i === paginaActual ){
+
+            btn.classList.add( "activa" );
+        }
+
+        btn.addEventListener( "click", () => {
+
+            console.log("Cambiando la página:", i);
+
+            paginaActual = i;
+
+            filtrarInventario();
+        })
+
+        contenedor.appendChild( btn );
+    }
+};
 
 
 //Función para obtener los diferentes productos, y el valor del inventario actual
@@ -231,8 +274,19 @@ const filtrarInventario = ( ) => {
     });
 
     const ordenados = ordernarInventario( filtrados );
-    renderInventario( ordenados );
 
+    const totalPaginas = Math.ceil( ordenados.length / productosPorPagina );
+
+    if ( paginaActual > totalPaginas ) { 
+        
+        paginaActual = totalPaginas || 1;
+    }
+
+    renderPaginacion( ordenados.length );
+
+    const paginados = paginar( ordenados );
+
+    renderInventario( paginados );
 };
 
 
@@ -303,7 +357,16 @@ const renderCategorias = ( ) => {
     });
 };
 
+
+const paginar = lista => {
+
+    const inicio = ( paginaActual -1 ) * productosPorPagina;
+    const fin = inicio + productosPorPagina;
+
+    return lista.slice( inicio, fin );
+};
+
 //Invocación a la función de renderizado de la app
-renderInventario( );
+filtrarInventario();
 renderCategorias();
 
